@@ -15,7 +15,7 @@ export default function Header() {
 
         {/* Navigation */}
         <nav className="flex space-x-6">
-          <Link href="/dashboard" className="hover:text-blue-400">Dashboard</Link>
+          
           <Link href="/upload" className="hover:text-blue-400">Upload</Link>
           <Link href="/library" className="hover:text-blue-400">Library</Link>
         </nav>
