@@ -21,11 +21,7 @@ export default function Header() {
         </nav>
 
         {/* User Actions (Auth placeholder) */}
-        <div className="space-x-4">
-          <Link href="/auth/signin" className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">
-            Sign In
-          </Link>
-        </div>
+       
       </div>
     </header>
   );
