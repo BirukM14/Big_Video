@@ -21,12 +21,12 @@ export default function DashboardPage() {
 </div>
 
 
-      <div className="grid grid-cols-2 gap-4 p-8  justify-center p-8">
+      <div className="grid grid-cols-2 gap-4 p-8  justify-center px-8 py-0">
       <Image
         src="/kes.jpg"
         alt="Hero Image"
         width={300}
-        height={70}
+        height={45}
         className="rounded-lg mb-4"
       />
       
@@ -34,7 +34,7 @@ export default function DashboardPage() {
         src="/bura.jpg"
         alt="Hero Image"
         width={300}
-        height={70}
+        height={45}
         className="rounded-lg mb-4"
       />
      
@@ -42,14 +42,14 @@ export default function DashboardPage() {
         src="/images.jpeg"
         alt="Hero Image"
         width={300}
-        height={70}
+        height={45}
         className="rounded-lg mb-4"
       />
       <Image
         src="/kes.jpg"
         alt="Hero Image"
         width={300}
-        height={70}
+        height={45}
         className="rounded-lg mb-4"
       />
       </div>
