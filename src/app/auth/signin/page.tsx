@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 
 const Signin = () => {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
+    <main className="min-h-screen flex items-center justify-center bg-black px-4">
       <div className="w-full max-w-md bg-white text-black p-8 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">Sign In</h1>
         <input
