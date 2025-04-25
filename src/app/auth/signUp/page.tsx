@@ -27,7 +27,7 @@ const SignUp = () => {
     console.log('Response from server:');
       
       // Make the POST request to sign up the user
-      const  {data}  = await axiosInstance.post('/signUp', {
+      const  {data}  = await axiosInstance.post('/api/signUp', {
         name,
         email,
         password,

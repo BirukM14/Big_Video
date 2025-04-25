@@ -1,40 +1,44 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import User from '@/app/models/User'; // Import your User model
-import bcrypt from 'bcryptjs'; // You can use bcrypt for password hashing
+// src/app/api/signIn/route.ts
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { email, password } = req.body;
+import { NextResponse } from 'next/server';
+import User from '@/app/models/User';
+import bcrypt from 'bcryptjs';
+import dbConnect from '@/app/db/config' // Make sure this exists
+
+export async function POST(req: Request) {
+  await dbConnect(); // Connect to MongoDB
+
+  try {
+    const body = await req.json();
+    const { email, password } = body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+      return NextResponse.json({ message: 'Email and password are required' }, { status: 400 });
     }
 
-    try {
-      // Find user in the database by email
-      const user = await User.findOne({ email });
+    const user = await User.findOne({ email });
 
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
 
-      // Compare the provided password with the hashed password in the database
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-
-      if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-
-      // Return the user data (excluding the password)
-      const { password: _, ...userWithoutPassword } = user.toObject();
-      return res.status(200).json(userWithoutPassword);
-
-    } catch (error) {
-      console.error('Error during sign-in:', error);
-      return res.status(500).json({ message: 'Something went wrong' });
+    if (!user) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
+    }
+
+    const { password: _, ...userWithoutPassword } = user.toObject();
+
+    return NextResponse.json(userWithoutPassword, { status: 200 });
+
+  } catch (error) {
+    console.error('Error during sign-in:', error);
+    return NextResponse.json({ message: 'Something went wrong' }, { status: 500 });
   }
+}
 
-  // If the method is not POST
-  return res.status(405).json({ message: 'Method not allowed' });
+export function GET() {
+  return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
 }
