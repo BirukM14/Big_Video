@@ -1,8 +1,6 @@
-// /app/dashboard/page.tsx
-import UserInfo from "./UserInfo";
-import VideoStats from "./Videostats";
-import RecentUploads from "./RecentUploads";
+
 import Image from "next/image";
+import VideoGallery from "../components/VideoGallery";
 
 export default function DashboardPage() {
   return (
@@ -53,10 +51,10 @@ export default function DashboardPage() {
         className="rounded-lg mb-4"
       />
       </div>
+
+      <VideoGallery/>
      
-      <VideoStats />
-      <RecentUploads />
-        <UserInfo />
+      
     </div>
   );
 }
