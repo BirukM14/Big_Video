@@ -1,10 +1,11 @@
-// /app/auth/signin/page.tsx
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react'; // Import NextAuth's signIn function
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation'; // useRouter from next/navigation for app router
 
 const Signin = () => {
+  const router = useRouter(); // Initialize router
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -13,7 +14,7 @@ const Signin = () => {
     e.preventDefault();
 
     const res = await signIn('credentials', {
-      redirect: false,  // Disable redirect after sign-in, handle it yourself
+      redirect: false, // IMPORTANT: set to false
       email,
       password,
     });
@@ -23,7 +24,7 @@ const Signin = () => {
       console.log('Sign-in failed:', res.error);
     } else {
       console.log('Sign-in successful');
-      // Optionally, you can redirect to another page or show a success message here
+      router.push('/dashboard'); // Redirect manually
     }
   };
 
